@@ -1,5 +1,3 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view style="height: 1080px; width: 1000px;" />
 </template>
