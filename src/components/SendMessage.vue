@@ -6,6 +6,7 @@ const props = defineProps(['label', 'data'])
 const nodeName = props.label
 const text = props.data.payload[0].text
 
+console.log(props)
 </script>
 
 <template>

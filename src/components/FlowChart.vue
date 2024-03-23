@@ -1,29 +1,16 @@
 <script setup>
 import { VueFlow } from '@vue-flow/core';
-import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import SendMessage from './SendMessage.vue';
+import { useNodeStore } from '../stores/stores';
 
-const nodes = ref([
-  {
-    label: "Away Message",
-    id: "b6a0c1",
-    type: "sendMessage",
-    position: { x: 100, y: 100 },
-    data: {
-      payload: [
-        {
-          type: "text",
-          text: "Sorry, we are currently away. We will respond as soon as possible.",
-        },
-      ],
-    }
-  },
-])
+const store = useNodeStore();
+const { nodes, edges } = storeToRefs(store)
 
 </script>
 
 <template>
-  <VueFlow :nodes="nodes">
+  <VueFlow :nodes="nodes" :edges="edges">
     <template #node-sendMessage="sendMessageProps">
       <SendMessage v-bind="sendMessageProps" />
     </template>
