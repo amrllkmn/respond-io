@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vue-flow/core": "^1.33.4",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
-    "vue-flow-renderer": "^0.0.1",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
