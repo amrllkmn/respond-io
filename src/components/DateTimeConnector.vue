@@ -1,5 +1,5 @@
 <script setup>
-import { Position, Handle } from '@vue-flow/core'
+import { Position, Handle, SmoothStepEdge } from '@vue-flow/core'
 
 // props were passed from the slot using `v-bind="customNodeProps"`
 const props = defineProps(['label', 'data'])
