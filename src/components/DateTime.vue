@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { faCalendar } from '@fortawesome/free-regular-svg-icons'
 // props were passed from the slot using `v-bind="customNodeProps"`
 const props = defineProps(['label', 'data'])
+import { truncateString } from '../utils';
 
 </script>
 
@@ -16,7 +17,7 @@ const props = defineProps(['label', 'data'])
         <p class="font-bold">{{ label }}</p>
       </div>
       <div class="bg-gray-100 text-black p-4 rounded-b-md">
-        <p class="text-xs">{{ props.data.description }}</p>
+        <p class="text-xs">{{ truncateString(props.data.description) }}</p>
       </div>
     </div>
     <Handle type="source" :position="Position.Bottom" />

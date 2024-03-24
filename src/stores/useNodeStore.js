@@ -5,7 +5,6 @@ import {
   createSendMessage,
   createAddComment,
   createDateTime,
-  truncateString,
 } from "../utils";
 import data from "../../payload.json";
 export const useNodeStore = defineStore("nodes", {
@@ -24,7 +23,6 @@ export const useNodeStore = defineStore("nodes", {
     },
 
     addNode(nodeForm) {
-      nodeForm.description = truncateString(nodeForm.description);
       switch (nodeForm.type) {
         case "addComment":
           const addCommentNode = createAddComment(nodeForm);

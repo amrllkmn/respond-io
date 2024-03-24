@@ -2,6 +2,7 @@
 import { Position, Handle } from '@vue-flow/core'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { faMessage } from '@fortawesome/free-regular-svg-icons'
+import { truncateString } from '../utils';
 // props were passed from the slot using `v-bind="customNodeProps"`
 const props = defineProps(['label', 'data'])
 const description = props.data.description;
@@ -16,7 +17,7 @@ const description = props.data.description;
         <p class="font-bold">{{ label }}</p>
       </div>
       <div class="bg-gray-100 text-black p-4 rounded-b-md">
-        <p class="text-xs">{{ description }}</p>
+        <p class="text-xs">{{ truncateString(description) }}</p>
       </div>
     </div>
     <Handle type="source" :position="Position.Bottom" />
