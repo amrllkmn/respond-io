@@ -34,8 +34,7 @@ function sortNodesByParentId(nodes) {
 export function getNodes(data) {
   const nodes = sortNodesByParentId(data);
   const processedNodes = [];
-  const gridSpacing = 100;
-  nodes.forEach((node, index) => {
+  nodes.forEach((node) => {
     const newNode = {};
     // Snap the position to the grid
     newNode.label = node.name;
@@ -45,6 +44,7 @@ export function getNodes(data) {
     newNode.position = { x: 0, y: 0 };
     newNode.parentId = node.parentId;
     processedNodes.push(newNode);
+    newNode.selectable = node.type === "dateTimeConnector" ? false : true;
   });
 
   return processedNodes;
@@ -62,6 +62,7 @@ export function getEdges(data) {
     relationship.id = `e${node.parentId}-${node.id}`;
     relationship.target = node.id.toString();
     relationship.source = node.parentId.toString();
+    relationship.type = "smoothstep";
     relationships.push(relationship);
   });
 
