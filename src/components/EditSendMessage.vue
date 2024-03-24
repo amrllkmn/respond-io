@@ -10,11 +10,13 @@ const { getNodeById } = storeToRefs(store);
 // onMounted(() => {
 //   hasNodeId.value = !!route.query.nodeId;
 // })
-const node = getNodeById.value(route.query.nodeId);
-console.log(node.data.payload)
+let node = getNodeById.value(route.query.nodeId);
 const textItems = node.data.payload.filter((item) => item.type === "text");
 const attachmentItems = node.data.payload.filter((item) => item.type === "attachment");
-console.log(textItems)
+
+watch(() => route.query.nodeId, () => {
+  node = getNodeById.value(route.query.nodeId);
+})
 </script>
 
 <template>

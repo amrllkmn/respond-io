@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router';
 import { useNodeStore } from '../stores/useNodeStore';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 const route = useRoute();
 const router = useRouter();
 const store = useNodeStore();
@@ -10,7 +10,7 @@ const store = useNodeStore();
 const { getNodeById } = storeToRefs(store);
 const { updateNode } = store;
 
-const node = computed(() => {
+let node = computed(() => {
   return getNodeById.value(route.query.nodeId);
 });
 
@@ -23,6 +23,10 @@ const editNode = () => {
   updateNode(updatedNode);
   router.push('/')
 }
+
+watch(() => route.query.nodeId, () => {
+  nodeData = getNodeById.value(route.query.nodeId);
+})
 </script>
 
 <template>

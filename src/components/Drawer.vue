@@ -17,7 +17,6 @@ const { getNodeById } = storeToRefs(store);
 let nodeData = getNodeById.value(route.query.nodeId);
 watch(() => route.query.nodeId, () => {
   nodeData = getNodeById.value(route.query.nodeId);
-  console.log(nodeData)
 })
 </script>
 

@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router';
 import { useNodeStore } from '../stores/useNodeStore';
+import { watch } from 'vue';
 const route = useRoute();
 const store = useNodeStore();
 
@@ -9,7 +10,10 @@ const { getNodeById } = storeToRefs(store);
 // onMounted(() => {
 //   hasNodeId.value = !!route.query.nodeId;
 // })
-const node = getNodeById.value(route.query.nodeId);
+let node = getNodeById.value(route.query.nodeId);
+watch(() => route.query.nodeId, () => {
+  node = getNodeById.value(route.query.nodeId);
+})
 const times = node.data.times;
 </script>
 
