@@ -14,7 +14,10 @@ const text = props.data.payload[0].text
     <div>
       <p>{{ nodeName }}</p>
     </div>
-    <p>{{ text }}</p>
+    <div>
+      Message:
+      <p style="font-style: italic;">{{ text }}</p>
+    </div>
     <Handle type="source" :position="Position.Bottom" />
   </div>
 </template>

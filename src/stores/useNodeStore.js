@@ -8,19 +8,21 @@ export const useNodeStore = defineStore("nodes", {
   getters: {
     nodes: (state) => {
       const processedNodes = [];
-      console.log(state.payload);
+      const gridSpacing = 100;
       state.payload.forEach((node, index) => {
         const newNode = {};
+        // Snap the position to the grid
+        const gridX = ((index * 50 + 50) / gridSpacing) * gridSpacing;
+        const gridY = ((index * 50 + 50) / gridSpacing) * gridSpacing;
+        console.log({ [index]: { gridX, gridY } });
         newNode.label = node.name;
         newNode.id = node.id;
         newNode.type = node.type;
         newNode.data = node.data;
-        newNode.position = { x: index * 50 + 50, y: index * 50 + 50 };
+        newNode.position = { x: gridX, y: gridY };
         newNode.parentId = node.parentId;
         processedNodes.push(newNode);
       });
-
-      console.log(processedNodes);
 
       return processedNodes;
     },
@@ -39,7 +41,6 @@ export const useNodeStore = defineStore("nodes", {
         relationships.push(relationship);
       });
 
-      console.log(relationships);
       return relationships;
     },
   },

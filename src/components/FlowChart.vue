@@ -1,7 +1,7 @@
 <script setup>
 import { VueFlow } from '@vue-flow/core';
 import { storeToRefs } from 'pinia';
-import { useNodeStore } from '../stores/stores';
+import { useNodeStore } from '../stores/useNodeStore';
 
 import SendMessage from './SendMessage.vue';
 import Trigger from './Trigger.vue';

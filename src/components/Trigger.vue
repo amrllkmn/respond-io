@@ -8,7 +8,6 @@ const props = defineProps(['data'])
 
 <template>
   <div>
-    <Handle type="target" :position="Position.Top" />
     <div>
       <p>Trigger</p>
     </div>
