@@ -1,4 +1,4 @@
-export function sortNodesByParentId(nodes) {
+function sortNodesByParentId(nodes) {
   const nodesMap = {};
   nodes.forEach((node) => {
     nodesMap[node.id] = node;
@@ -29,4 +29,41 @@ export function sortNodesByParentId(nodes) {
   return sortedNodes.map((node) => {
     return { ...node, data: nodesMap[node.id].data }; // Adding data to sorted nodes
   });
+}
+
+export function getNodes(data) {
+  const nodes = sortNodesByParentId(data);
+  const processedNodes = [];
+  const gridSpacing = 100;
+  nodes.forEach((node, index) => {
+    const newNode = {};
+    // Snap the position to the grid
+    newNode.label = node.name;
+    newNode.id = node.id.toString();
+    newNode.type = node.type;
+    newNode.data = node.data;
+    newNode.position = { x: 0, y: 0 };
+    newNode.parentId = node.parentId;
+    processedNodes.push(newNode);
+  });
+
+  return processedNodes;
+}
+export function getEdges(data) {
+  const nodes = sortNodesByParentId(data);
+  const relationships = [];
+
+  // Iterate through payload to extract relationships
+  nodes.forEach((node) => {
+    if (node.parentId < 0) {
+      return;
+    }
+    const relationship = {};
+    relationship.id = `e${node.parentId}-${node.id}`;
+    relationship.target = node.id.toString();
+    relationship.source = node.parentId.toString();
+    relationships.push(relationship);
+  });
+
+  return relationships;
 }
