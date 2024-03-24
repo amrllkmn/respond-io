@@ -8,8 +8,8 @@ const props = defineProps(['data'])
 
 <template>
   <div>
-    <div>
-      <p>Trigger</p>
+    <div class="bg-white text-black p-4 rounded-md">
+      <p class="font-bold">Trigger</p>
     </div>
     <Handle type="source" :position="Position.Bottom" />
   </div>

@@ -9,7 +9,7 @@ const connectorType = props.data.connectorType;
 <template>
   <div>
     <Handle type="target" :position="Position.Top" />
-    <div>
+    <div class="bg-white rounded-md p-4">
       <p :class="connectorType === 'success' ? 'success' : 'failure'"> {{ label }}</p>
     </div>
     <Handle type="source" :position="Position.Bottom" />
@@ -19,11 +19,13 @@ const connectorType = props.data.connectorType;
 <style>
 .success {
   color: green;
+  font-weight: bold;
   /* Add any other styles for success here */
 }
 
 .failure {
   color: red;
+  font-weight: bold;
   /* Add any other styles for failure here */
 }
 </style>

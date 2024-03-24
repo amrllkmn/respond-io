@@ -144,6 +144,7 @@ export function createDateTime(nodeForm) {
       },
     ],
     connectors: [successConnectorId, failureConnectorId],
+    description: nodeForm.description,
   }),
     (newNode.position = { x: 0, y: 0 });
   newNode.parentId = "";
@@ -224,4 +225,11 @@ function createDateTimeConnections(id, parentId) {
   relationship.type = "smoothstep";
 
   return relationship;
+}
+
+export function truncateString(str, maxLength = 20, ellipses = "...") {
+  if (str.length <= maxLength) {
+    return str;
+  }
+  return str.slice(0, maxLength - ellipses.length) + ellipses;
 }
