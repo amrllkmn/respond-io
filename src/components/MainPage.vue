@@ -2,7 +2,8 @@
 import { useRoute } from 'vue-router';
 import { ref, onMounted } from 'vue';
 
-import Main from './Main.vue'
+import Main from './Main.vue';
+import Drawer from './Drawer.vue';
 
 const route = useRoute();
 const hasNodeId = ref(false);
@@ -15,11 +16,9 @@ onMounted(() => {
 <template>
   <div v-if="hasNodeId" class="grid grid-cols-[4fr_2fr]">
     <Main />
-    <div>
-      <p>{{ route.query.nodeId }}</p>
-    </div>
+    <Drawer />
   </div>
-  <dive v-else class="grid grid-cols-1">
+  <div v-else class="grid grid-cols-1">
     <Main />
-  </dive>
+  </div>
 </template>
