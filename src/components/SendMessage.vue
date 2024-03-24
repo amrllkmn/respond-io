@@ -17,7 +17,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div @click="handleClick" :is-selected>
+  <div @click="handleClick">
     <Handle type="target" :position="Position.Top" />
     <div class="bg-white grid grid-rows-2 rounded-md">
       <div class="text-black p-4 grid grid-cols-[0fr_1fr] content-center gap-2 text-sm">

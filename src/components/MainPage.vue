@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 
 import Main from './Main.vue';
 import Drawer from './Drawer.vue';
@@ -11,6 +11,11 @@ const hasNodeId = ref(false);
 onMounted(() => {
   hasNodeId.value = !!route.query.nodeId;
 })
+
+onUpdated(() => {
+  hasNodeId.value = !!route.query.nodeId;
+})
+console.log(hasNodeId)
 </script>
 
 <template>

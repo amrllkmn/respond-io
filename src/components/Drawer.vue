@@ -8,12 +8,17 @@ const store = useNodeStore();
 import EditSendMessage from './EditSendMessage.vue';
 import EditDateTime from './EditDateTime.vue';
 import EditAddComment from './EditAddComment.vue';
+import { watch } from 'vue';
 
 const { getNodeById } = storeToRefs(store);
 // onMounted(() => {
 //   hasNodeId.value = !!route.query.nodeId;
 // })
-const nodeData = getNodeById.value(route.query.nodeId);
+let nodeData = getNodeById.value(route.query.nodeId);
+watch(() => route.query.nodeId, () => {
+  nodeData = getNodeById.value(route.query.nodeId);
+  console.log(nodeData)
+})
 </script>
 
 <template>
