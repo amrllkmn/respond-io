@@ -28,7 +28,10 @@ export const useNodeStore = defineStore("nodes", {
       const relationships = [];
 
       // Iterate through payload to extract relationships
-      state.payload.forEach((node, index) => {
+      state.payload.forEach((node) => {
+        if (node.parentId < 0) {
+          return;
+        }
         const relationship = {};
         relationship.id = `e${node.parentId}-${node.id}`;
         relationship.target = node.id.toString();
