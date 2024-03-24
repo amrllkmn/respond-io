@@ -84,6 +84,93 @@ export function createSendMessage(nodeForm) {
   return newNode;
 }
 
+export function createAddComment(nodeForm) {
+  const newNode = {};
+  // Snap the position to the grid
+  newNode.label = nodeForm.title;
+  newNode.id = generateRandomId();
+  newNode.type = nodeForm.type;
+  newNode.data = { description: nodeForm.description, comment: "" };
+  newNode.position = { x: 0, y: 0 };
+  newNode.parentId = "";
+  newNode.selectable = true;
+  return newNode;
+}
+
+export function createDateTime(nodeForm) {
+  const newNode = {};
+  const successConnectorId = generateRandomId();
+  const failureConnectorId = generateRandomId();
+  // Snap the position to the grid
+  newNode.label = nodeForm.title;
+  newNode.id = generateRandomId();
+  newNode.type = "dateTime";
+  (newNode.data = {
+    times: [
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "mon",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "tue",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "wed",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "thu",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "fri",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "sat",
+      },
+      {
+        startTime: "09:00",
+        endTime: "17:00",
+        day: "sun",
+      },
+    ],
+    connectors: [successConnectorId, failureConnectorId],
+  }),
+    (newNode.position = { x: 0, y: 0 });
+  newNode.parentId = "";
+  newNode.selectable = true;
+
+  const { successConnector, failureConnector } = createDateTimeConnectors(
+    successConnectorId,
+    failureConnectorId,
+    newNode.id
+  );
+
+  const successConnection = createDateTimeConnections(
+    successConnectorId,
+    newNode.id
+  );
+
+  const failureConnection = createDateTimeConnections(
+    failureConnectorId,
+    newNode.id
+  );
+
+  return {
+    nodes: [newNode, successConnector, failureConnector],
+    edges: [successConnection, failureConnection],
+  };
+}
+
 function generateRandomId() {
   // Create an array to hold random bytes
   const randomBytes = new Uint8Array(3); // 3 bytes = 6 hexadecimal characters
@@ -97,4 +184,44 @@ function generateRandomId() {
     .join("");
 
   return randomId;
+}
+
+function createDateTimeConnectors(
+  successConnectorId,
+  failureConnectorId,
+  parentId
+) {
+  const successConnector = {
+    label: "Success",
+    id: successConnectorId,
+    type: "dateTimeConnector",
+    data: {
+      connectorType: "success",
+    },
+    parentId: parentId,
+    selectable: false,
+  };
+
+  const failureConnector = {
+    label: "Failure",
+    id: failureConnectorId,
+    type: "dateTimeConnector",
+    data: {
+      connectorType: "failure",
+    },
+    parentId: parentId,
+    selectable: false,
+  };
+
+  return { failureConnector, successConnector };
+}
+
+function createDateTimeConnections(id, parentId) {
+  const relationship = {};
+  relationship.id = `e${parentId}-${id}`;
+  relationship.target = id.toString();
+  relationship.source = parentId.toString();
+  relationship.type = "smoothstep";
+
+  return relationship;
 }

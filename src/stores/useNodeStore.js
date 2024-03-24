@@ -1,5 +1,11 @@
 import { defineStore } from "pinia";
-import { getNodes, getEdges, createSendMessage } from "../utils";
+import {
+  getNodes,
+  getEdges,
+  createSendMessage,
+  createAddComment,
+  createDateTime,
+} from "../utils";
 import data from "../../payload.json";
 export const useNodeStore = defineStore("nodes", {
   state: () => ({
@@ -15,13 +21,18 @@ export const useNodeStore = defineStore("nodes", {
     addNode(nodeForm) {
       switch (nodeForm.type) {
         case "addComment":
-          console.log("NOT IMPLEMENTED YET");
+          const addCommentNode = createAddComment(nodeForm);
+          this.nodes = [...this.nodes, addCommentNode];
           break;
         case "businessHours":
-          console.log("NOT IMPLEMENTED YET");
+          const { nodes, edges } = createDateTime(nodeForm);
+          this.nodes = this.nodes.concat(nodes);
+          this.edges = this.edges.concat(edges);
+          console.log(this.nodes);
+          break;
         default:
-          const newNode = createSendMessage(nodeForm);
-          this.nodes = [...this.nodes, newNode];
+          const sendMessageNode = createSendMessage(nodeForm);
+          this.nodes = [...this.nodes, sendMessageNode];
           break;
       }
     },
