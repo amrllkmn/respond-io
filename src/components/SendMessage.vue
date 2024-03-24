@@ -16,7 +16,7 @@ const description = props.data.description;
         <p class="font-bold">{{ label }}</p>
       </div>
       <div class="bg-gray-100 text-black p-4 rounded-b-md">
-        <p>{{ description }}</p>
+        <p class="text-xs">{{ description }}</p>
       </div>
     </div>
     <Handle type="source" :position="Position.Bottom" />
