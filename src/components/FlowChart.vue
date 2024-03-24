@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useNodeStore } from '../stores/useNodeStore';
 import { useLayout } from '../stores/useLayout';
 import { nextTick, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import SendMessage from './SendMessage.vue';
 import Trigger from './Trigger.vue';
 import DateTimeConnector from './DateTimeConnector.vue';
@@ -11,10 +12,20 @@ import DateTime from './DateTime.vue';
 import AddComment from './AddComment.vue';
 
 const store = useNodeStore();
-const { graph, layout } = useLayout();
+const router = useRouter();
+const { layout } = useLayout();
 const { nodes, edges } = storeToRefs(store);
 const { updateNodes } = store;
-const { fitView, zoomIn, onInit } = useVueFlow();
+const { fitView, onInit } = useVueFlow();
+
+const emitNodeClick = defineEmits(['node-clicked']);  // Define custom event
+
+const handleNodeClick = (data) => {
+  // Your function to handle the click with the data from the node
+  console.log('Node clicked:', data);
+  // You can perform actions based on the data (e.g., open modal, update store)
+  router.push({ path: '/', query: { nodeId: data } })
+}
 
 async function layoutGraph(direction) {
   const newNodes = layout(nodes.value, edges.value, direction);
@@ -51,16 +62,16 @@ onInit(() => {
           <Trigger v-bind="triggerProps" />
         </template>
         <template #node-sendMessage="sendMessageProps">
-          <SendMessage v-bind="sendMessageProps" />
+          <SendMessage v-bind="sendMessageProps" @node-clicked="handleNodeClick" />
         </template>
         <template #node-dateTimeConnector="dateTimeConnectorProps">
           <DateTimeConnector v-bind="dateTimeConnectorProps" />
         </template>
         <template #node-dateTime="dateTimeProps">
-          <DateTime v-bind="dateTimeProps" />
+          <DateTime v-bind="dateTimeProps" @node-clicked="handleNodeClick" />
         </template>
         <template #node-addComment="addCommentProps">
-          <AddComment v-bind="addCommentProps" />
+          <AddComment v-bind="addCommentProps" @node-clicked="handleNodeClick" />
         </template>
       </VueFlow>
     </div>

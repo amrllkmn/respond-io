@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router';
 import { useNodeStore } from '../stores/useNodeStore';
-import { computed } from 'vue';
+import { watch } from 'vue';
 const route = useRoute();
 const store = useNodeStore();
 

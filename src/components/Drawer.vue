@@ -14,7 +14,6 @@ const { getNodeById } = storeToRefs(store);
 //   hasNodeId.value = !!route.query.nodeId;
 // })
 const nodeData = getNodeById.value(route.query.nodeId);
-console.log(nodeData.type)
 </script>
 
 <template>

@@ -4,12 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { faMessage } from '@fortawesome/free-regular-svg-icons'
 import { truncateString } from '../utils';
 // props were passed from the slot using `v-bind="customNodeProps"`
-const props = defineProps(['label', 'data'])
+const props = defineProps(['id', 'label', 'data'])
 const description = props.data.description;
+
+const emitNodeClick = defineEmits(['node-clicked']);  // Define custom event (already defined in FlowChart.vue)
+
+const handleClick = () => {
+  // Emit the `node-clicked` event with the node ID (or data)
+  emitNodeClick('node-clicked', props.id); // Pass relevant data (e.g., id)
+}
+
 </script>
 
 <template>
-  <div>
+  <div @click="handleClick" :is-selected>
     <Handle type="target" :position="Position.Top" />
     <div class="bg-white grid grid-rows-2 rounded-md">
       <div class="text-black p-4 grid grid-cols-[0fr_1fr] content-center gap-2 text-sm">
