@@ -5,7 +5,6 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons'
 // props were passed from the slot using `v-bind="customNodeProps"`
 const props = defineProps(['label', 'data'])
 
-console.log(props)
 </script>
 
 <template>
@@ -17,7 +16,7 @@ console.log(props)
         <p class="font-bold">{{ label }}</p>
       </div>
       <div class="bg-gray-100 text-black p-4 rounded-b-md">
-        <p>{{ props.data.description }}</p>
+        <p class="text-xs">{{ props.data.description }}</p>
       </div>
     </div>
     <Handle type="source" :position="Position.Bottom" />
