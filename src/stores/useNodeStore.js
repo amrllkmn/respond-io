@@ -13,7 +13,11 @@ export const useNodeStore = defineStore("nodes", {
     nodes: getNodes(data),
     edges: getEdges(data),
   }),
-  getters: {},
+  getters: {
+    getNodeById: (state) => {
+      return (nodeId) => state.nodes.find((node) => node.id === nodeId);
+    },
+  },
   actions: {
     updateNodes(newNodes) {
       this.nodes = newNodes;

@@ -45,7 +45,7 @@ export function getNodes(data) {
     newNode.parentId = node.parentId;
     processedNodes.push(newNode);
     newNode.selectable = node.type === "dateTimeConnector" ? false : true;
-    newNode.data.description = "";
+    newNode.data.description = "No description provided";
   });
 
   return processedNodes;
