@@ -11,5 +11,9 @@ export const useNodeStore = defineStore("nodes", {
     updateNodes(newNodes) {
       this.nodes = newNodes;
     },
+
+    addNode(nodeForm) {
+      console.log(nodeForm);
+    },
   },
 });

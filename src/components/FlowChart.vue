@@ -34,7 +34,6 @@ onMounted(() => {
     flowChartHeight.value = container.value.offsetHeight;
     flowChartWidth.value = container.value.offsetWidth * 0.75;
     fitView()
-    zoomIn(); // Zoom in after computing the container size
   }
 });
 
