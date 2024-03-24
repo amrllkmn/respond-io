@@ -1,3 +1,3 @@
 <template>
-  <router-view style="height: 1080px; width: 1000px;" />
+  <router-view class="h-screen" />
 </template>

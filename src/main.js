@@ -5,12 +5,12 @@ import { createPinia } from "pinia";
 import "./style.css";
 
 // Import your components
-import FlowChart from "./components/FlowChart.vue";
+import MainPage from "./components/MainPage.vue";
 
 // Create a new router instance
 const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: "/", component: FlowChart }],
+  routes: [{ path: "/", component: MainPage }],
 });
 
 // Create pinia instance
