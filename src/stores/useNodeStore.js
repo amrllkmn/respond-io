@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getNodes, getEdges } from "../utils";
+import { getNodes, getEdges, createSendMessage } from "../utils";
 import data from "../../payload.json";
 export const useNodeStore = defineStore("nodes", {
   state: () => ({
@@ -13,7 +13,17 @@ export const useNodeStore = defineStore("nodes", {
     },
 
     addNode(nodeForm) {
-      console.log(nodeForm);
+      switch (nodeForm.type) {
+        case "addComment":
+          console.log("NOT IMPLEMENTED YET");
+          break;
+        case "businessHours":
+          console.log("NOT IMPLEMENTED YET");
+        default:
+          const newNode = createSendMessage(nodeForm);
+          this.nodes = [...this.nodes, newNode];
+          break;
+      }
     },
   },
 });

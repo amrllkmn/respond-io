@@ -45,6 +45,7 @@ export function getNodes(data) {
     newNode.parentId = node.parentId;
     processedNodes.push(newNode);
     newNode.selectable = node.type === "dateTimeConnector" ? false : true;
+    newNode.data.description = "";
   });
 
   return processedNodes;
@@ -67,4 +68,33 @@ export function getEdges(data) {
   });
 
   return relationships;
+}
+
+export function createSendMessage(nodeForm) {
+  console.log(nodeForm);
+  const newNode = {};
+  // Snap the position to the grid
+  newNode.label = nodeForm.title;
+  newNode.id = generateRandomId();
+  newNode.type = nodeForm.type;
+  newNode.data = { payload: [], description: nodeForm.description };
+  newNode.position = { x: 0, y: 0 };
+  newNode.parentId = "";
+  newNode.selectable = true;
+  return newNode;
+}
+
+function generateRandomId() {
+  // Create an array to hold random bytes
+  const randomBytes = new Uint8Array(3); // 3 bytes = 6 hexadecimal characters
+
+  // Generate random values
+  window.crypto.getRandomValues(randomBytes);
+
+  // Convert bytes to hexadecimal string
+  const randomId = Array.from(randomBytes)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+
+  return randomId;
 }

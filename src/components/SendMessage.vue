@@ -4,8 +4,7 @@ import { Position, Handle } from '@vue-flow/core'
 // props were passed from the slot using `v-bind="customNodeProps"`
 const props = defineProps(['label', 'data'])
 const nodeName = props.label
-const text = props.data.payload[0].text
-
+const description = props.data.description;
 </script>
 
 <template>
@@ -15,8 +14,7 @@ const text = props.data.payload[0].text
       <p>{{ nodeName }}</p>
     </div>
     <div>
-      Message:
-      <p style="font-style: italic;">{{ text }}</p>
+      <p style="font-style: italic;">{{ description }}</p>
     </div>
     <Handle type="source" :position="Position.Bottom" />
   </div>
