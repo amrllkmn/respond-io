@@ -22,6 +22,18 @@ export const useNodeStore = defineStore("nodes", {
       this.nodes = newNodes;
     },
 
+    updateNode(updatedNode) {
+      this.nodes.map((node) => {
+        if (node.id === updatedNode.id) {
+          node.label = updatedNode.label;
+          node.data = updatedNode.data;
+        } else {
+          return node;
+        }
+      });
+      console.log(this.nodes);
+    },
+
     addNode(nodeForm) {
       switch (nodeForm.type) {
         case "addComment":
